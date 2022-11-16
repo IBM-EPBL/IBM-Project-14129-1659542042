@@ -1,0 +1,30 @@
+Real-Time Communication System Powered By AI For Specially Abled
+Loading the Dataset &amp; Image Data Generation
+
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+# Training Datagen
+train_datagen =
+ImageDataGenerator(rescale=1/255,zoom_range=0.2,horizontal_flip=True,vertical_flip=False)
+# Testing Datagen
+test_datagen = ImageDataGenerator(rescale=1/255)
+# Training Dataset
+x_train=train_datagen.flow_from_directory(r&#39;/content/drive/MyDrive/Dataset/training_set&#39;,target_size
+=(64,64), class_mode=&#39;categorical&#39;,batch_size=900)
+# Testing Dataset
+x_test=test_datagen.flow_from_directory(r&#39;/content/drive/MyDrive/Dataset/test_set&#39;,target_size=(64,6
+4), class_mode=&#39;categorical&#39;,batch_size=900)
+Found 15760 images belonging to 9 classes.
+Found 2250 images belonging to 9 classes.
+print(&quot;Len x-train : &quot;, len(x_train))
+print(&quot;Len x-test : &quot;, len(x_test))
+Len x-train : 18
+Len x-test : 3
+# The Class Indices in Training Dataset
+x_train.class_indices
+{&#39;A&#39;: 0, &#39;B&#39;: 1, &#39;C&#39;: 2, &#39;D&#39;: 3, &#39;E&#39;: 4, &#39;F&#39;: 5, &#39;G&#39;: 6, &#39;H&#39;: 7, &#39;I&#39;: 8}
+Model Creation
+
+# Importing Libraries
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Convolution2D,MaxPooling2D,Flatten,Dense

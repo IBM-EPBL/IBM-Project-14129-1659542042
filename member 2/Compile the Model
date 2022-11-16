@@ -1,0 +1,26 @@
+from keras.preprocessing.image import ImageDataGenerator
+train_datagen=ImageDataGenerator(rescale=1./255,shear_range=0.2,zoom_range=0.2,horizontal_flip=T
+rue)
+test_datagen=ImageDataGenerator(rescale=1./255)
+x_train =
+train_datagen.flow_from_directory(&#39;/content/Dataset/training_set&#39;,target_size=(64,64),batch_size=300,
+class_mode=&#39;categorical&#39;,color_mode=&quot;grayscale&quot;)
+Found 15750 images belonging to 9 classes.
+x_test =
+test_datagen.flow_from_directory(&#39;/content/Dataset/test_set&#39;,target_size=(64,64),batch_size=300,class
+_mode=&#39;categorical&#39;,color_mode=&quot;grayscale&quot;)
+Found 2250 images belonging to 9 classes.
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import Convolution2D
+from keras.layers import MaxPooling2D
+from keras.layers import Dropout
+from keras.layers import Flatten
+model = Sequential()
+model.add(Convolution2D(32,(3,3),input_shape=(64,64,1), activation=&#39;relu&#39;))
+#no. of feature detectors, size of feature detector, image size, activation function
+model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(Flatten())
+model.add(Dense(units=512, activation = &#39;relu&#39;))
+model.add(Dense(units=9, activation = &#39;softmax&#39;))
+model.compile(loss=&#39;categorical_crossentropy&#39;, optimizer = &#39;adam&#39;, metrics = [&#39;accuracy&#39;])
